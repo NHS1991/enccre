@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="fr">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/pages.css"/>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <title>Affichage par page</title>
+</head>
+<body>
+<div id="configuration_page">
+    <input type="button" value="+" onclick="zoomIn()">
+    <input type="button" value="-" onclick="zoomOut()">
+</div>
+<div class="pages">
+    {{page_content|raw}}
+</div>
+<script>
+    var fontSize = 1;
+    var elems = document.getElementsByClassName("doc_transform");
+    function zoomIn() {
+        fontSize += 0.1;
+        for (var i=0;i<elems.length;i++){
+            elems[i].style.fontSize = fontSize + "em";
+        }
+    }
+    function zoomOut() {
+        fontSize -= 0.1;
+        if (fontSize < 0.5)
+            fontSize = 0.5;
+        for (var i=0;i<elems.length;i++){
+            elems[i].style.fontSize = fontSize + "em";
+        }
+    }
+</script>
+</body>
+</html>

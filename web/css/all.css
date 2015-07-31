@@ -1,0 +1,183 @@
+ul{
+    list-style-type:none;
+}
+
+button{
+    border: 1px solid black;
+    background: white;
+    padding: 5px;
+    min-width:2em;
+    min-height:2em;
+}
+
+
+button:hover{
+    background:rgb(165, 163, 163);
+}
+
+hr{
+    border-bottom: 1px solid black;
+}
+
+p{
+    text-indent: 3em;
+    margin:5px;
+    word-wrap:break-word;
+}
+
+a{
+    color:inherit;
+}
+
+a:hover{
+    color:inherit;
+}
+
+.smallcaps{
+    font-variant: small-caps;
+    padding:2px;
+}
+
+.italic{
+    font-style: italic;
+    padding:2px;
+}
+
+.vedette_adresse{
+    background-color: yellowgreen;
+    padding:2px;
+}
+.vedette_entree{
+    background-color: #ffff00;
+    padding:2px;
+}
+
+.designants{
+    background-color: #FF62D3;
+    padding:2px;
+}
+
+.designant{
+    background-color: pink;
+    padding:2px;
+}
+
+.indication_grammaticale{
+    background-color: #c9ffc1;
+    padding:2px;
+}
+
+.indication_renvoi{
+    background-color: deepskyblue;
+    padding:2px;
+}
+
+.marque_collaborateur{
+    background-color: cadetblue;
+    padding:2px;
+}
+
+.indication_attribution{
+    background-color: rgb(109, 229, 232);
+    padding:2px;
+}
+
+.renvoi{
+    background-color: rgb(242, 238, 255);
+    padding:2px;
+}
+
+.article_vise{
+    background-color: rgb(165, 178, 255);
+    padding:2px;
+}
+
+.article_vise>a{
+    text-decoration: none;
+}
+
+.article_vise>a>span{
+    color:black;
+}
+
+#configuration_page{
+    position:absolute;
+    left:5px;
+    top:0;
+}
+
+.tableau_couleur{
+    border:1px black solid;
+    background-color:rgb(226, 215, 184);
+    display:none;
+}
+
+.tableau_couleur ul{
+    padding:5px;
+}
+
+.enccre-menu {
+    z-index:1000;
+    position: absolute;
+    background-color:white;
+    border: 1px solid black;
+    padding:0;
+}
+
+.enccre-menu ul{
+    padding:0;
+}
+.enccre-menu li{
+    padding: 0;
+    position: relative;
+    display: block;
+}
+
+.enccre-menu button {
+    width:100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.enccre-menu ul:hover,.enccre-menu button:hover + ul, .submenu:hover>ul{
+    display: block; /* Display the dropdown */
+}
+
+.right-caret:after,.left-caret:after {
+    content:"";
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+    display: inline-block;
+    height: 0;
+    vertical-align: middle;
+    width: 0;
+    margin-left:5px;
+}
+.right-caret:after{
+    border-left: 5px solid #ffaf46;
+}
+.left-caret:after{
+    border-right: 5px solid #ffaf46;
+}
+ul.dropdown-menu-right{
+    left: 100%;
+    position: absolute;
+    top:0;
+    display:none;
+    margin-top: -1px;
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    border:1px solid black;
+    box-shadow:none;
+}
+
+::selection{
+    background: rgba(0, 0, 0, 0.27);
+    color: white;
+    z-index: 9999;
+}
+::-moz-selection{ /* Code for Firefox */
+    background: rgba(0, 0, 0, 0.27);
+    color: white;
+    z-index: 9999;
+}

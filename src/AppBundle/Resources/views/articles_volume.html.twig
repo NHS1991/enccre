@@ -1,0 +1,26 @@
+<html>
+<head lang="fr">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/articles_volume.css"/>
+    <title>Encyclopédie, ou Dictionnaire raisonné des sciences, des arts et des métiers - Tome {{ volume }}</title>
+</head>
+<body>
+<h1 style="text-align:center">Encyclopédie, ou Dictionnaire raisonné des sciences,
+    des arts et des métiers<br>Tome {{ volume }}</h1>
+<ul class="articles">
+    {% for index_article,sous_articles  in list_articles %}
+        {% set adresse = sous_articles[0] %}
+        {% set entrees = sous_articles[1:] %}
+        <li><a href="{{ index_article }}">{{ adresse }}</a>
+            {% if entrees|length>0 %}
+                <ul>
+                    {% for pos,entree in entrees %}
+                    <li><a href="{{ index_article }}#{{ pos+1 }}">{{ entree }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

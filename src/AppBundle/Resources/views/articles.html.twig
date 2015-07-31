@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="fr">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/styles/index.css"/>
+    <title>Encyclopédie, ou Dictionnaire raisonné des sciences, des arts et des métiers</title>
+</head>
+<body>
+<h1 style="text-align:center">Encyclopédie, ou Dictionnaire raisonné des sciences, des arts et des métiers<br>Volume 8</h1>
+<ul class="articles">
+    {% for article in list_articles %}
+        <li><a href="/articles/id/{{article[0]}}">{{article[1][0]}}</a>
+            {% if article[1]|length > 1 %}
+                <ul>
+                {% for i in range(1,article[1]|length)  %}
+                    <li><a href="/articles/id/{{article[0]}}#{{article[0]}}-{{i}}">{{article[1][i]}}</a></li>
+                {% endfor %}
+                </ul>
+            {% endif%}
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>

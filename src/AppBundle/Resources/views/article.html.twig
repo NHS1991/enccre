@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="fr">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/article.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <title>Affichage par article</title>
+</head>
+<body>
+<h1 class="article_name">Article {{name_article}}</h1>
+<div id="configuration_page">
+    <button onclick="zoomIn()">+</button>
+    <button onclick="zoomOut()">-</button>
+    <button id="button_couleur">Gestion des couleurs</button>
+    <div class="tableau_couleur">
+        <ul>
+            <li><span style="background-color: yellowgreen;text-transform:uppercase;">Vedette d'adresse</span></li>
+            <li><span style="background-color: #ffff00;font-variant:small-caps;">Vedette d'entrée</span></li>
+            <li><span style="background-color: #c9ffc1;">Indication grammaticale</span></li>
+            <li><span style="background-color: #FF62D3;">Désignants</span></li>
+            <li><span style="background-color: pink;">Désignant</span></li>
+            <li><span style="background-color: rgb(242, 238, 255);">Renvoi</span></li>
+            <li><span style="background-color: deepskyblue;">Indication de renvoi</span></li>
+            <li><span style="background-color: rgb(165, 178, 255);">Article visé</span></li>
+            <li><span style="background-color: cadetblue;">Attribution (Marque collaborateur)</span></li>
+            <li><span style="background-color: rgb(109, 229, 232);">Attribution (Indication d'attribution)</span></li>
+        </ul>
+    </div>
+</div>
+<div id="articles_volume_accueil">
+    <button onclick="changeHref('../{{ volume }}')">Liste d'articles du volume {{ volume }}</button>
+</div>
+<div id="btn-page-mode">
+    <button onclick="changeHref('../../page/{{ volume }}/{{ first_page }}#{{ id_article }}')">Le mode par page</button>
+</div>
+<div class="change_article">
+    {% if next_article is not null  %}
+        <div class="next_article"><button onclick="changeHref('{{next_article}}')">Article suivant</button></div>
+    {% endif %}
+    {% if previous_article is not null  %}
+        <div class="previous_article"><button onclick="changeHref('{{previous_article}}')">Article précédent</button></div>
+    {% endif %}
+</div>
+<div id="content">
+{{article|raw}}
+</div>
+<script src="../../js/all.js"></script>
+<script src="../../js/article.js"></script>
+</body>
+</html>

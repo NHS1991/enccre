@@ -1,0 +1,107 @@
+body{
+    background-color: rgb(226, 215, 184);
+    margin:0;
+}
+
+.article{
+    display:block;
+    font-size:1em;
+}
+
+#content{
+    text-align: justify;
+    padding: 2% 5%;
+}
+
+p{
+    text-indent: 3em;
+    margin:5px;
+}
+
+.vedette_adresse{
+    background-color: yellowgreen;
+}
+.vedette_entree{
+    background-color: #ffff00;
+}
+
+.designants{
+    background-color: #FF62D3;
+}
+
+.designant{
+    background-color: pink;
+}
+
+.indication_grammaticale{
+    background-color: #c9ffc1;
+}
+
+.indication_renvoi{
+    background-color: deepskyblue;
+}
+
+.attribution{
+    background-color: cadetblue;
+}
+
+.renvoi{
+    background-color: rgb(242, 238, 255);
+}
+
+.article_vise{
+    background-color: rgb(165, 178, 255);
+}
+
+.article_vise>a{
+    text-decoration: none;
+}
+
+.article_vise>a>span{
+    color:black;
+}
+
+#configuration_page{
+    position:absolute;
+    left:5px;
+    top:0;
+}
+
+.tableau_couleur{
+    border:1px black solid;
+    background-color:rgb(226, 215, 184);
+    display:none;
+}
+
+.tableau_couleur ul{
+    padding:5px;
+}
+
+ul{
+    list-style-type:none;
+}
+
+input[type="button"]:hover{
+    cursor: pointer;
+}
+
+.next_article{
+    position:fixed;
+    right:0;
+    bottom:0;
+}
+
+.previous_article{
+    position:fixed;
+    left:0;
+    bottom:0;
+}
+#articles_volume_accueil{
+    position:absolute;
+    right:0;
+    top:0;
+}
+
+hr{
+    border-bottom: 1px solid black;
+}

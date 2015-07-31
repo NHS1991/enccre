@@ -1,0 +1,47 @@
+body{
+    background-color: rgb(226, 215, 184);
+    margin:0;
+}
+
+.article_name{
+    margin-top: 5%;
+    text-align: center;
+}
+
+.article{
+    display:block;
+    font-size:1em;
+}
+
+#content{
+    text-align: justify;
+    padding: 2% 5%;
+}
+
+.next_article{
+    position:fixed;
+    right:0;
+    bottom:0;
+}
+
+.previous_article{
+    position:fixed;
+    left:0;
+    bottom:0;
+}
+#articles_volume_accueil{
+    position:absolute;
+    right:0;
+    top:0;
+}
+
+#btn-page-mode{
+    position:absolute;
+    top:0;
+    right: 40%;
+    width: 20%;
+}
+
+#btn-page-mode>button{
+    width:100%;
+}

@@ -1,0 +1,25 @@
+body{
+    background-color: rgb(226, 215, 184);
+    margin:0;
+}
+
+.articles{
+    list-style-type: decimal;
+}
+
+.articles>li>a{
+    background-color: yellowgreen;
+}
+
+a, a:visited{
+  color: inherit;
+}
+
+.articles>li>ul{
+    list-style-type: decimal;
+}
+
+.articles>li>ul>li>a{
+    background-color: #ffff00;
+    font-variant: small-caps;
+}

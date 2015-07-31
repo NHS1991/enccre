@@ -1,0 +1,111 @@
+body{
+    background: white;
+    margin:0;
+}
+.page{
+    width: 100%;
+}
+.content{
+    width: 100%;
+}
+#configuration_page{
+    position:absolute;
+    left:5px;
+    top:0;
+}
+.doc_transform{
+    font-size:1em;
+    text-align:justify;
+    padding: 3%;
+}
+
+.infos_page{
+    width:100%;
+    background: rgba(125, 137, 156, 0.27);
+    color:red;
+    height:1.5em;
+}
+
+input[type="button"]:hover{
+    cursor: pointer;
+}
+
+.nb_vue{
+    width:33%;
+    text-align:center;
+    float:left;
+}
+.nb_page{
+    width:34%;
+    text-align: center;
+    float:left;
+}
+.signature_imprimeur{
+    width:33%;
+    text-align: center;
+    float:left;
+}
+p{
+    text-indent: 3em;
+}
+hr{
+    margin-bottom: 5%;
+}
+
+.vedette_adresse{
+    background-color: yellowgreen;
+}
+.vedette_entree{
+    background-color: #ffff00;
+}
+
+.designants{
+    background-color: #FF62D3;
+}
+
+.designant{
+    background-color: pink;
+}
+
+.indication_grammaticale{
+    background-color: #c9ffc1;
+}
+
+.indication_renvoi{
+    background-color: deepskyblue;
+}
+
+.attribution{
+    background-color: cadetblue;
+}
+
+.renvoi{
+    background-color: rgb(242, 238, 255);
+}
+
+.article_vise{
+    background-color: rgb(165, 178, 255);
+}
+
+.article_vise>a{
+    text-decoration: none;
+}
+
+.article_vise>a>span{
+    color:black;
+}
+
+ul{
+    list-style-type:none;
+}
+
+p{
+    margin:5px;
+}
+@media print {
+    .page {page-break-after: always;}
+}
+
+hr{
+    border-bottom: 1px solid black;
+}

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head lang="fr">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/reset.css"/>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/all.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/page.css"/>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+    <title>Affichage par page</title>
+</head>
+<body>
+<div id="configuration_page">
+    <button onclick="zoomIn()">+</button>
+    <button onclick="zoomOut()">-</button>
+    <button id="button_couleur">Gestion des couleurs</button>
+    <div class="tableau_couleur">
+        <ul>
+            <li><span style="background-color: yellowgreen;text-transform:uppercase;">Vedette d'adresse</span></li>
+            <li><span style="background-color: #ffff00;font-variant:small-caps;">Vedette d'entrée</span></li>
+            <li><span style="background-color: #c9ffc1;">Indication grammaticale</span></li>
+            <li><span style="background-color: #FF62D3;">Désignants</span></li>
+            <li><span style="background-color: pink;">Désignant</span></li>
+            <li><span style="background-color: rgb(242, 238, 255);">Renvoi</span></li>
+            <li><span style="background-color: deepskyblue;">Indication de renvoi</span></li>
+            <li><span style="background-color: rgb(165, 178, 255);">Article visé</span></li>
+            <li><span style="background-color: cadetblue;">Attribution (Marque collaborateur)</span></li>
+            <li><span style="background-color: rgb(109, 229, 232);">Attribution (Indication d'attribution)</span></li>
+        </ul>
+    </div>
+</div>
+<div class="button_zoom">
+    <button onclick="zoomImgIn('#doc_original img')">+</button>
+    <button onclick="zoomImgOut('#doc_original img')">-</button>
+</div>
+<div id="articles_volume_accueil">
+    <button onclick="changeHref('../../article/{{ volume }}')">Liste d'articles du volume {{ volume }}</button>
+</div>
+{{page_content|raw}}
+<div class="change_page">
+    {% if next_page is not null  %}
+        <div class="next_page"><button onclick="changeHref('{{next_page}}')">Page suivante</button></div>
+    {% endif %}
+    {% if previous_page is not null  %}
+        <div class="previous_page"><button onclick="changeHref('{{previous_page}}')">Page précédente</button></div>
+    {% endif %}
+</div>
+<script src="../../js/wheelzoom.js"></script>
+<script src="../../js/all.js"></script>
+<script src="../../js/page.js"></script>
+{#<script src="../../js/correction.js"></script>#}
+{#<script>#}
+    {#$(document).ready(function(){#}
+      {#var sel;#}
+      {#var doc_transform = $("#doc_transform");#}
+      {#doc_transform.on('contextmenu',function(e){#}
+          {#e.preventDefault();#}
+          {#var pos_x = e.pageX + 5,#}
+          {#pos_y = e.pageY + 5;#}
+          {#if ($(".enccre-menu").length){#}
+              {#$(".enccre-menu").remove()#}
+          {#}#}
+          {#if (window.getSelection) {#}
+              {#sel = window.getSelection();#}
+              {#var selected_text = window.getSelection().toString();#}
+              {#var text_copy = selected_text.trim();#}
+              {#var range = sel.getRangeAt(0);#}
+              {#if (selected_text!=""){#}
+                  {#var startContainer = range.startContainer;#}
+                  {#var clone_startContainer = startContainer;#}
+                  {#var startContainer_context = startContainer.textContent;#}
+                  {#var clone_parent_startContainer = startContainer.parentNode;#}
+                  {#var startOffset = range.startOffset;#}
+                  {#var endContainer = range.endContainer;#}
+                  {#var clone_endContainer = endContainer;#}
+                  {#var endContainer_context = endContainer.textContent;#}
+                  {#var clone_parent_endContainer = endContainer.parentNode;#}
+                  {#var endOffset = range.endOffset;#}
+                  {#var commonAncestor = range.commonAncestorContainer;#}
+                  {#var test_closed_tag = true;#}
+                  {#if(clone_parent_startContainer.getAttribute("class") =="petit_titre"){#}
+                          {#test_closed_tag = false;#}
+                  {#}#}
+                  {#else {#}
+                      {#if (startContainer != endContainer) {#}
+                          {#if (commonAncestor.nodeName.toLowerCase() == "div") {#}
+                              {#test_closed_tag = false;#}
+                          {#}#}
+                          {#else if (!(commonAncestor.nodeName.toLowerCase() == "p" && commonAncestor.hasAttribute("data-n"))) {#}
+                              {#if (startOffset != 0) {#}
+                                  {#test_closed_tag = false;#}
+                              {#}#}
+                              {#else {#}
+                                  {#while (test_closed_tag && clone_startContainer != commonAncestor) {#}
+                                      {#if (clone_startContainer != clone_parent_startContainer.firstChild) {#}
+                                          {#test_closed_tag = false;#}
+                                      {#}#}
+                                      {#clone_startContainer = clone_parent_startContainer;#}
+                                      {#clone_parent_startContainer = clone_parent_startContainer.parentNode;#}
+                                  {#}#}
+                              {#}#}
+                              {#if (endOffset != endContainer.textContent.length) {#}
+                                  {#test_closed_tag = false;#}
+                              {#}#}
+                              {#else {#}
+                                  {#while (test_closed_tag && clone_endContainer != commonAncestor) {#}
+                                      {#if (clone_endContainer != clone_parent_endContainer.lastChild) {#}
+                                          {#test_closed_tag = false;#}
+                                      {#}#}
+                                      {#clone_endContainer = clone_parent_endContainer;#}
+                                      {#clone_parent_endContainer = clone_parent_endContainer.parentNode;#}
+                                  {#}#}
+                              {#}#}
+                          {#}#}
+                          {#else if (commonAncestor.nodeName.toLowerCase() == "p" && commonAncestor.hasAttribute("data-n")) {#}
+                              {#while (test_closed_tag && clone_parent_startContainer != commonAncestor) {#}
+                                  {#if (clone_startContainer != clone_parent_startContainer.firstChild) {#}
+                                      {#test_closed_tag = false;#}
+                                  {#}#}
+                                  {#clone_startContainer = clone_parent_startContainer;#}
+                                  {#clone_parent_startContainer = clone_parent_startContainer.parentNode;#}
+                              {#}#}
+                              {#while (test_closed_tag && clone_parent_endContainer != commonAncestor) {#}
+                                  {#if (clone_endContainer != clone_parent_endContainer.lastChild) {#}
+                                      {#test_closed_tag = false;#}
+                                  {#}#}
+                                  {#clone_endContainer = clone_parent_endContainer;#}
+                                  {#clone_parent_endContainer = clone_parent_endContainer.parentNode;#}
+                              {#}#}
+                          {#}#}
+                      {#}#}
+                  {#}#}
+                  {#$('<ul class="enccre-menu"><li class="submenu addmenu"><button class="btn-drop-down right-caret" type="button" id="dropdownMenuAdd" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Ajouter</button><ul class="dropdown-menu dropdown-menu-right"><li class="submenu"><button class="btn-drop-down right-caret" type="button" id="dropdownMenuAddCat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Définition comme</button><ul class="dropdown-menu dropdown-menu-right"><li class="submenu"><button type="button" id="dropdownSubMenuAddVedette" class="btn-drop-down right-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Vedette</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="vedette_adresse" id="btn-add-vedette-adresse">Vedette d\'adresse</button></li><li><button data-type="vedette_entree" id="btn-add-vedette-entree">Vedette d\'entrée</button></li></ul></li><li class="submenu"><button type="button" id="dropdownSubMenuAddDesignant" class="btn-drop-down right-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Désignant</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="designants" id="btn-add-designants">Désignants</button></li><li><button data-type="designant" id="btn-add-designant">Désignant</button></li></ul></li><li><button data-type="indication_grammaticale" id="btn-add-indication-grammaticale">Indication grammaticale</button></li><li class="submenu"><button type="button" id="dropdownSubMenuAddAttribution" class="btn-drop-down right-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Attribution</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="attribution" data-subType="marque_collaborateur" id="btn-add-marque-collaborateur">Marque collaborateur</button></li><li><button data-type="attribution" data-subType="indication_attribution" id="btn-add-indication-attribution">Indication d\'attribution</button></li></ul></li><li class="submenu"><button type="button" id="dropdownSubMenuAddRenvoi" class="btn-drop-down right-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Renvoi</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="renvoi" id="btn-add-renvoi">Renvoi</button></li><li><button data-type="indication_renvoi" id="btn-add-indication-renvoi">Indication de renvoi</button></li><li><button data-type="article_vise" id="btn-add-article-vise">Article visé</button></li></ul></li></ul></li><li class="submenu"><button class="btn-drop-down right-caret" type="button" id="dropdownMenuAddTypo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Mise en forme</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="italic" id="btn-add-italic">Italique</button></li><li><button data-type="smallcaps" id="btn-add-smallcaps">Petite capitale</button></li></ul></li></ul></li><li class="submenu removemenu"><button class="btn-drop-down right-caret" type="button" id="dropdownMenuRemove" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Enlever</button><ul class="dropdown-menu dropdown-menu-right"><li class="submenu"><button class="btn-drop-down right-caret" type="button" id="dropdownMenuRemoveCat" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Définition comme</button><ul class="dropdown-menu dropdown-menu-right"><li class="submenu"><button type="button" id="dropdownSubMenuRemoveVedette" class="btn-drop-down right-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Vedette</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="vedette_adresse" id="btn-remove-vedette-adresse">Vedette d\'adresse</button></li><li><button data-type="vedette_entree" id="btn-remove-vedette-entree">Vedette d\'entrée</button></li></ul></li><li class="submenu"><button type="button" id="dropdownSubMenuRemoveDesignant" class="btn-drop-down right-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Désignant</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="designants" id="btn-remove-designants">Désignants</button></li><li><button data-type="designant" id="btn-remove-designant">Désignant</button></li></ul></li><li><button data-type="indication_grammaticale" id="btn-remove-indication-grammaticale">Indication grammaticale</button></li><li class="submenu"><button type="button" id="dropdownSubMenuRemoveAttribution" class="btn-drop-down right-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Attribution</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="attribution" data-subType="marque_collaborateur" id="btn-remove-marque-collaborateur">Marque collaborateur</button></li><li><button data-type="attribution" data-subType="indication_attribution" id="btn-remove-indication-attribution">Indication d\'attribution</button></li></ul></li><li class="submenu"><button type="button" id="dropdownSubMenuRemoveRenvoi" class="btn-drop-down right-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Renvoi</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="renvoi" id="btn-remove-renvoi">Renvoi</button></li><li><button data-type="indication_renvoi" id="btn-remove-indication-renvoi">Indication de renvoi</button></li><li><button data-type="article_vise" id="btn-remove-article-vise">Article visé</button></li></ul></li></ul></li><li class="submenu"><button class="btn-drop-down right-caret" type="button" id="dropdownMenuRemoveTypo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Mise en forme</button><ul class="dropdown-menu dropdown-menu-right"><li><button data-type="italic" id="btn-remove-italic">Italique</button></li><li><button data-type="smallcaps" id="btn-remove-smallcaps">Petite capitale</button></li></ul></li></ul></li><li><button id="btn-correct-text">Corriger ce texte</button></li><li><button id="btn-copy-text">Copier ce texte</button></li></ul>').appendTo("body").css({top: pos_y + "px", left: pos_x + "px"});#}
+                  {#$("#btn-copy-text").click(function(e){#}
+                      {#e.preventDefault();#}
+                      {#copyText(text_copy);#}
+                  {#});#}
+                  {#if (!test_closed_tag){#}
+                      {#$(".addmenu, .removemenu").remove();#}
+                      {#$("#btn-correct-text").parent().remove();#}
+                  {#}#}
+                  {#else{#}
+                      {#var array_container = [];#}
+                      {#var array_p_div = [];#}
+                      {#var i, parent, num_p, id_sous_article;#}
+                      {#if (startContainer === endContainer || !(commonAncestor.nodeName.toLowerCase()=="p" && commonAncestor.hasAttribute("data-n"))){#}
+                          {#var array_pos = [];#}
+                          {#var array_class_name = [];#}
+                          {#array_pos.push(startOffset);#}
+                          {#array_pos.push(selected_text.length);#}
+                          {#parent = getPositions(commonAncestor, array_pos,array_class_name);#}
+                          {#num_p = parent.getAttribute("data-n");#}
+                          {#id_sous_article = parent.parentNode.getAttribute("id");#}
+                          {#array_p_div.push(num_p);#}
+                          {#array_p_div.push(id_sous_article);#}
+                          {#array_container.push([selected_text,array_pos]);#}
+                          {#if (array_class_name.length > 0){#}
+                              {#var array_type = ["vedette_adresse","vedette_entree","designants","designant","indication_grammaticale","marque_collaborateur","indication_attribution","renvoi","indication_renvoi","article_vise","italic","smallcaps"];#}
+                              {#for (i=0; i<array_type.length;i++){#}
+                                  {#var type_name = array_type[i];#}
+                                  {#var pos_type_name = array_class_name.indexOf(type_name);#}
+                                  {#if (pos_type_name==-1){#}
+                                      {#$(".removemenu button[data-type='"+type_name+"']").parent().remove();#}
+                                      {#$(".removemenu button[data-subType='"+type_name+"']").parent().remove();#}
+                                  {#}#}
+                              {#}#}
+                              {#$($("ul.dropdown-menu-right").get().reverse()).each(function(){#}
+                                  {#var parent = $(this);#}
+                                  {#var parent_show=false;#}
+                                  {#var children = parent.children("li");#}
+                                  {#children.each(function(){#}
+                                     {#if ($(this).css("display")!="none"){#}
+                                         {#parent_show=true;#}
+                                     {#}#}
+                                  {#});#}
+                                  {#if (!parent_show){#}
+                                      {#parent.hide();#}
+                                      {#parent.prev(".btn-drop-down").hide();#}
+                                  {#}#}
+                              {#});#}
+                              {#$($("li.submenu").get().reverse()).each(function(){#}
+                                  {#var parent = $(this);#}
+                                  {#var parent_show=false;#}
+                                  {#var children = parent.children("ul").children("li");#}
+                                  {#children.each(function(){#}
+                                      {#if ($(this).css("display")!="none"){#}
+                                          {#parent_show=true;#}
+                                      {#}#}
+                                  {#});#}
+                                  {#if (!parent_show){#}
+                                      {#parent.hide();#}
+                                      {#parent.prev(".btn-drop-down").hide();#}
+                                  {#}#}
+                              {#});#}
+                              {#$(".removemenu button[data-type]").click(function(e){#}
+                                  {#e.preventDefault();#}
+                                  {#$(".enccre-menu").remove();#}
+                                  {#removeTag(array_container,array_p_div,$(this).attr("data-type"),$(this).attr("data-subType"));#}
+                              {#});#}
+                          {#}#}
+                          {#else{#}
+                              {#$(".removemenu").remove();#}
+                          {#}#}
+                          {#if (startContainer === endContainer){#}
+                              {#$("#btn-correct-text").click(function(e){#}
+                                  {#e.preventDefault();#}
+                                  {#$(".enccre-menu").remove();#}
+                                  {#correctTect(array_container,array_p_div);#}
+                              {#});#}
+                          {#}#}
+                          {#else{#}
+                              {#$("#btn-correct-text").parent().remove();#}
+                          {#}#}
+                      {#}#}
+                      {#else{#}
+                          {#$(".removemenu").remove();#}
+                          {#$("#btn-correct-text").parent().remove();#}
+                          {#num_p = commonAncestor.getAttribute("data-n");#}
+                          {#id_sous_article = commonAncestor.parentNode.getAttribute("id");#}
+                          {#array_p_div.push(num_p);#}
+                          {#array_p_div.push(id_sous_article);#}
+                          {#var array_pos_startContainer=[], array_pos_endContainer = [];#}
+                          {#array_pos_startContainer.push(startOffset);#}
+                          {#array_pos_startContainer.push(startContainer_context.length-startOffset);#}
+                          {#getPositions(clone_startContainer, array_pos_startContainer);#}
+                          {#array_container.push([startContainer_context.substring(startOffset),array_pos_startContainer]);#}
+                          {#array_pos_endContainer.push(0);#}
+                          {#array_pos_endContainer.push(endOffset);#}
+                          {#getPositions(clone_endContainer, array_pos_endContainer);#}
+                          {#array_container.push([endContainer_context.substring(0,endOffset),array_pos_endContainer]);#}
+                      {#}#}
+                      {#if (num_p !="0"){#}
+                          {#$("#dropdownSubMenuAddVedette").parent().remove();#}
+                      {#}#}
+                      {#else{#}
+                          {#var num_sous_article = id_sous_article.substring(id_sous_article.lastIndexOf("-")+1);#}
+                          {#if (num_sous_article == "0"){#}
+                              {#$("#btn-add-vedette-entree").parent().remove();#}
+                          {#}#}
+                          {#else{#}
+                              {#$("#btn-add-vedette-adresse").parent().remove();#}
+                          {#}#}
+                      {#}#}
+                      {#$(".addmenu button[data-type]").click(function(e){#}
+                          {#e.preventDefault();#}
+                          {#$(".enccre-menu").remove();#}
+                          {#addTag(array_container,array_p_div,$(this).attr("data-type"),$(this).attr("data-subType"));#}
+                      {#});#}
+                  {#}#}
+              {#}#}
+          {#}#}
+      {#});#}
+        {#var posX = null, posY = null;#}
+      {#$("body").on("click", function(e){#}
+          {#if (e.pageX != posX && e.pageY != posY) {#}
+              {#posX = e.pageX;#}
+              {#posY = e.pageY;#}
+          {#}#}
+          {#else{#}
+              {#if (window.getSelection)#}
+                  {#window.getSelection().removeAllRanges();#}
+          {#}#}
+          {#var target = e.target;#}
+          {#var target_name = target.nodeName.toLowerCase();#}
+          {#if (target_name != "span" && target_name != "a" && target_name != "button") {#}
+              {#e.preventDefault();#}
+          {#}#}
+          {#if ($(".enccre-menu").length) {#}
+              {#$(".enccre-menu").remove();#}
+          {#}#}
+      {#});#}
+    {#});#}
+
+{#</script>#}
+</body>
+</html>
